@@ -8,9 +8,13 @@ var app = app || {};
     });
     }*/
     function getAlphabetically() {
-        httpRequest.getJSON(app.servicesBaseUrl  + "places")
+        httpRequest.getJSON("http://api.theysaidso.com/bible/vod")
         .then(function(places) {
-            viewModel.set("places", places); 
+            debugger;
+            var quote = {};
+            quote.dano = places.contents.verse.toString();
+            console.log(quote.dano);
+            viewModel.set("places", quote); 
             console.log(places);
         });
     }
