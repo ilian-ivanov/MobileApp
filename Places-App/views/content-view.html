@@ -4,28 +4,31 @@
             <div data-role="header">
                 <div data-role="navbar">
                     <a data-role="button" data-icon="reply" href="views/categories-view.html#categories-view" data-align="left">Back</a>
-                    <a data-role="button" data-icon="global" data-click="postFb" data-align="right">Share</a>
+                    <a data-role="button" data-icon="globe" data-click="postFb" data-align="right">Share in FB</a>
                 </div>
             </div>
             <div id="content-quote" data-role="listview" data-bind="source: quote" 
-                data-template="place-template">                
+                data-template="content-template">                
             </div>
         </div>
     <!--</div>-->
 
-<script id="place-template" type="text/x-kendo-template">
+<script id="content-template" type="text/x-kendo-template">
     <div>
         <h2>Quote of the day in category "#:category#"</h2>
-        <p>#:quote#</p>
-        <p>Author: <strong>#:author #</strong></p>
+        <p id="quote">#:quote#</p>
+        <p id="author">Author: #:author #</p>
         
     </div>
 </script>
 
 <script>    
     function postFb(e) {
-        debugger;
-        app.facebook.makefbPost("Post from my first mobile app!");
+        var quote = $("#quote").html() + "\r\n";
+        var author = $("#author").html();
+        var post = quote + author;
+        //debugger;
+        app.facebook.makefbPost(post);
         //console.log('op')
     };
 </script>

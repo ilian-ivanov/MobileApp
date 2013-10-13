@@ -4,15 +4,13 @@ var app = app || {};
     var viewModel = kendo.observable({
         categories:[],
         selectedCategory:null,
-        getQuoteOfTheDay:getQuoteOfTheDay,
+        getCategory:getCategory,
         quote: []
     });
     
     function init(e) {
         kendo.bind(e.view.element, viewModel);
-        
-        //httpRequest.getJSON("http://localhost:62354/api/" + "categories")
-        httpRequest.getJSON("http://api.theysaidso.com/qod/categories.json")
+        httpRequest.getJSON(app.servicesBaseUrl + "qod/categories.json")
         .then(function (categories) {
             var cat = categories.contents.categories;
             var cats = [];
@@ -24,26 +22,28 @@ var app = app || {};
             
             viewModel.set("categories", cats);    
             app.facebook.init();
+        },
+        function(response){
+            var responseText= JSON.parse(response.responseText);
+            console.log(responseText.error.message);
+            var err = {Name: responseText.error.message};
+            var error = [err];
+            console.log(error);            
+            viewModel.set("categories", error);
         });        
     }
     
     function quote(){
-        //debugger;
-        //console.log(selectedCategory)
-        httpRequest.getJSON("http://api.theysaidso.com/qod.json?category=" + selectedCategory)
+        httpRequest.getJSON(app.servicesBaseUrl + "qod.json?category=" + selectedCategory)
         .then(function(quote) {
-            //console.log(quote);
             quote = quote.contents;
             quote.category = selectedCategory;
             var newQuote = [quote];
             viewModel.set("quote", newQuote);
-            //debugger;
-            //console.log(newQuote);
         });
     }
     
-    function getQuoteOfTheDay(e) {
-        //console.log(e.sender.element.prop("id"));
+    function getCategory(e) {
         var category = e.sender.element.prop("id");
         selectedCategory = category;        
     }

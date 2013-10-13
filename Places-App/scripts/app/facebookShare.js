@@ -50,19 +50,17 @@ function makefbPost(FBmessage) {
         type: "POST",
         url: "https://graph.facebook.com/me/feed",
         jso_provider: "facebook",
-        jso_scopes: ["read_stream", "publish_stream"],
+        jso_scopes: ["read_stream", "publish_stream", "publish_actions"],
         jso_allowia: true,
         dataType: 'json',
         data: {
             message: FBmessage,
         },
         success: function (responseData) {
-            console.log('successsssssssssssssssssssssssssssss2')
             navigator.notification.alert("Status Posted", function () {
             }, "DebugMode", "Done");
         },
         error: function (errorData) {
-            console.log('errorrrrrrrrrrrrrrrrrr');
             navigator.notification.alert("Error encountered. Details:" + errorData.message, function () {
             }, "Error", "Done");
         }

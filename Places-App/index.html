@@ -14,20 +14,33 @@
         <script src="scripts/libs/rsvp.min.js"></script>
         <script src="scripts/libs/jso.js"></script>
         <script src="scripts/app/http-request.js"></script>
-        <script src="scripts/app/extensions.js"></script>
+        <script src="scripts/app/quoteOfTheDay.js"></script>
         <script src="scripts/app/categories.js"></script>
-        <script src="scripts/app/places.js"></script>
+        <script src="scripts/app/bible.js"></script>
         <script src="scripts/app/facebookShare.js"></script>
         <script src="scripts/app.js"></script>
         
     </head>
     <body>
-        <div id="home-view" data-id="home-view" data-role="view"
+        <div id="home-view" data-id="home-view" data-role="view" data-show="app.theQuote.init" 
              data-layout="main-layout" data-title="Home">
-            This application is for fun. You can take "Quote of the Day" for 6 categories. 
-            Every day the quote is changed. Also you can take random Quote if you want :))
+            <p>This application is for fun. You can take "Quote of the Day" for 6 categories. 
+            Every day the quote is changed. Also you can take random Quote if you want :))</p>
+            <div data-role="listview" id="quote-of-the-day" data-bind="source: quote" data-template="theQuote-template"></div>
         </div>
 
+        <script id="theQuote-template" type="text/x-kendo-template">
+            <div>
+                #if(author != false){#
+                    <h2>Quote of the day!</h2>
+                #}#                
+                    <p id="quote">#:quote#</p>
+                #if(author != false){#
+                    <p id="author">Author: #:author #</p>
+                #}#
+            </div>
+        </script>
+        
         <div data-role="layout" id="main-layout" data-id="main-layout">
             <header data-role="header">
                 <div data-role="navbar">
@@ -38,20 +51,10 @@
                 <div data-role="tabstrip">
                     <a href="#home-view" data-icon="home">Home</a>
                     <a href="views/categories-view.html#categories-view" data-icon="bookmarks">Quote of the Day</a>
-                    <a href="views/places-view.html#places-view" data-icon="info">Info</a>
+                    <a href="views/bible-view.html#bible-view" data-icon="info">Bible verses</a>
                 </div>
             </footer>
         </div>
         
-        
-        
-<script>    
-    function postFb() {
-        app.facebook.init();
-        debugger;
-        app.facebook.makefbPost("Post from my first mobile app!", "");
-        //console.log('op')
-    };
-</script>
     </body>
 </html>

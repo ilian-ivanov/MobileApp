@@ -1,0 +1,14 @@
+<div data-role="view" id="bible-view" data-id="bible-view"
+     data-layout="main-layout" data-title="Bible Verses"
+     data-show="app.bible.init" >
+    <div id="categories-holder">
+        <div id="categories-list" data-role="listview"
+                data-bind="source: types"
+            data-template="bible-template">
+        </div>
+    </div>       
+</div>
+
+<script id="bible-template" type="text/x-kendo-template">    
+    <a data-bind="events: { click: getCat}" href="views/verse-view.html\#verse-view" style="display: block; margin: 2em; text-align: center;" id="#:Name#" data-role="button">#:Name#</a> 
+</script>

@@ -1,0 +1,30 @@
+  <div data-role="view" data-init="app.bible.init" data-show="app.bible.quote" id="verse-view" data-id="verse-view"
+      data-layout="main-layout" data-title="Verse">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-icon="reply" href="views/bible-view.html#bible-view" data-align="left">Back</a>
+                    <a data-role="button" data-icon="globe" data-click="postFb" data-align="right">Share in FB</a>
+                </div>
+            </div>
+            <div id="content-verse" data-role="listview" data-bind="source: verse" 
+                data-template="verse-template">                
+            </div>
+        </div>
+
+<script id="verse-template" type="text/x-kendo-template">
+    <div>
+        <h2>#: Name#</h2>
+        
+    </div>
+</script>
+
+<script>    
+    function postFb(e) {
+        //var quote = $("#quote").html() + "\r\n";
+        //var author = $("#author").html();
+        //var post = quote + author;
+        //debugger;
+        //app.facebook.makefbPost(post);
+        //console.log('op')
+    };
+</script>

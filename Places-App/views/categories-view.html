@@ -10,5 +10,9 @@
 </div>
 
 <script id="categories-template" type="text/x-kendo-template">
-    <a data-bind="events: { click: getQuoteOfTheDay}" href="views/content-view.html\#content-view" style="display: block; margin: 2em; text-align: center;" id="#:Name#" data-role="button">#:Name#</a>    
+    #if(Name.length < 30){#
+        <a data-bind="events: { click: getCategory}" href="views/content-view.html\#content-view" style="display: block; margin: 2em; text-align: center;" id="#:Name#" data-role="button">#:Name#</a>   
+    #}else{#
+        <p>#:Name#</p>
+    #}#
 </script>
