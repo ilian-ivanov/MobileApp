@@ -1,0 +1,31 @@
+  <div data-role="view" data-init="app.categories.init" data-show="app.categories.quote" id="content-view" data-id="content-view"
+      data-layout="main-layout" data-title="Content">
+        <!--<div data-role="modalview" id="content-view" data-modal="false" style="width: 95%; height: 18em;">-->
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-icon="reply" href="views/categories-view.html#categories-view" data-align="left">Back</a>
+                    <a data-role="button" data-icon="global" data-click="postFb" data-align="right">Share</a>
+                </div>
+            </div>
+            <div id="content-quote" data-role="listview" data-bind="source: quote" 
+                data-template="place-template">                
+            </div>
+        </div>
+    <!--</div>-->
+
+<script id="place-template" type="text/x-kendo-template">
+    <div>
+        <h2>Quote of the day in category "#:category#"</h2>
+        <p>#:quote#</p>
+        <p>Author: <strong>#:author #</strong></p>
+        
+    </div>
+</script>
+
+<script>    
+    function postFb(e) {
+        debugger;
+        app.facebook.makefbPost("Post from my first mobile app!");
+        //console.log('op')
+    };
+</script>

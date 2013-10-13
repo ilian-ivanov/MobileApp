@@ -1,19 +1,11 @@
 var app = app || {};
 
 (function(a) {
-    /*function getAllPlaces(options){
-    httpRequest.getJSON(app.servicesBaseUrl  + "places")
-    .then(function(places){
-    ret
-    });
-    }*/
     function getAlphabetically() {
-        httpRequest.getJSON("http://api.theysaidso.com/bible/vod")
+        httpRequest.getJSON("http://api.theysaidso.com/bible/vod.json")
         .then(function(places) {
-            debugger;
-            var quote = {};
-            quote.dano = places.contents.verse.toString();
-            console.log(quote.dano);
+            console.log(places);
+            var quote = [places.contents];
             viewModel.set("places", quote); 
             console.log(places);
         });
@@ -38,8 +30,9 @@ var app = app || {};
     });
     
     function init(e) {
+        debugger;
         kendo.bind(e.view.element, viewModel);
-       getAlphabetically();
+        getAlphabetically();
     }   
     
     a.places = {

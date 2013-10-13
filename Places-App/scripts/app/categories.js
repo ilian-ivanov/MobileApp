@@ -4,30 +4,52 @@ var app = app || {};
     var viewModel = kendo.observable({
         categories:[],
         selectedCategory:null,
-        change:onCategoryChanged
+        getQuoteOfTheDay:getQuoteOfTheDay,
+        quote: []
     });
     
     function init(e) {
         kendo.bind(e.view.element, viewModel);
         
         //httpRequest.getJSON("http://localhost:62354/api/" + "categories")
-        httpRequest.getJSON( app.servicesBaseUrl + "categories")
+        httpRequest.getJSON("http://api.theysaidso.com/qod/categories.json")
         .then(function (categories) {
-            viewModel.set("categories", categories);            
+            var cat = categories.contents.categories;
+            var cats = [];
+            for(c in cat)
+            {
+                var obj = {Name: c};
+                cats.push(obj);  
+            }
+            
+            viewModel.set("categories", cats);    
+            app.facebook.init();
         });        
     }
     
-    function onCategoryChanged(e) {             
-        console.log(e.sender._selectedValue);
-        
-        httpRequest.getJSON(app.servicesBaseUrl  + "categories/" + e.sender._selectedValue)
-        .then(function(category) {
-            viewModel.set("selectedCategory", category);
-            console.log(category);
+    function quote(){
+        //debugger;
+        //console.log(selectedCategory)
+        httpRequest.getJSON("http://api.theysaidso.com/qod.json?category=" + selectedCategory)
+        .then(function(quote) {
+            //console.log(quote);
+            quote = quote.contents;
+            quote.category = selectedCategory;
+            var newQuote = [quote];
+            viewModel.set("quote", newQuote);
+            //debugger;
+            //console.log(newQuote);
         });
     }
     
+    function getQuoteOfTheDay(e) {
+        //console.log(e.sender.element.prop("id"));
+        var category = e.sender.element.prop("id");
+        selectedCategory = category;        
+    }
+    
     a.categories = {
-        init:init          
+        init:init,
+        quote: quote
     };
 }(app));
