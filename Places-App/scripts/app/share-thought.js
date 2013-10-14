@@ -1,6 +1,8 @@
 var app = app || {};
 
 (function(a) {
+    var error = "";
+    
     function init() {
                  
         var viewModel = kendo.observable({
@@ -20,6 +22,7 @@ var app = app || {};
         else{
             app.facebook.init();
             app.facebook.makefbPost(head);  
+            viewModel.set("message", "");
             closeModalView()
         }
     };
