@@ -14,7 +14,8 @@ var app = app || {};
     
     function takeVerse(){        
         var url = ""
-        if(selectedCategory == "random"){
+        debugger;
+        if(selectedCategory == "Random"){
              url = "verse.json";   
         }
         else{
@@ -22,10 +23,10 @@ var app = app || {};
         }
         
         httpRequest.getJSON(app.servicesBaseUrl + "bible/" + url)
-        .then(function (verse) {
-            console.log(verse)
-            
-            viewModel.set("verse", cats);    
+        .then(function (response) {
+            console.log(response)
+            var verse = [response.contents];
+            viewModel.set("verse", verse);    
             app.facebook.init();
         },
         function(response){
@@ -40,7 +41,8 @@ var app = app || {};
     
     function getCat(e) {
         var category = e.sender.element.prop("id");
-        selectedCategory = category;        
+        selectedCategory = category;   
+        takeVerse();
         console.log(category);
     }
     

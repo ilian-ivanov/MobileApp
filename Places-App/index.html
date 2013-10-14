@@ -25,7 +25,9 @@
         <div id="home-view" data-id="home-view" data-role="view" data-show="app.theQuote.init" 
              data-layout="main-layout" data-title="Home">
             <p>This application is for fun. You can take "Quote of the Day" for 6 categories. 
-            Every day the quote is changed. Also you can take random Quote if you want :))</p>
+            Every day the quote is changed. Also you can take bible verse if you want :))
+             or to share you own thought.
+            </p>
             <div data-role="listview" id="quote-of-the-day" data-bind="source: quote" data-template="theQuote-template"></div>
         </div>
 
@@ -50,11 +52,47 @@
             <footer data-role="footer">
                 <div data-role="tabstrip">
                     <a href="#home-view" data-icon="home">Home</a>
-                    <a href="views/categories-view.html#categories-view" data-icon="bookmarks">Quote of the Day</a>
-                    <a href="views/bible-view.html#bible-view" data-icon="info">Bible verses</a>
+                    <a href="views/categories-view.html#categories-view" data-icon="favorites">Quote of the Day</a>
+                    <a href="views/bible-view.html#bible-view" data-icon="bookmarks">Bible verses</a>
+                    <a data-rel="modalview" href="#share-thought" data-icon="share">Share thought</a>
                 </div>
             </footer>
+        </div>        
+
+        <div data-role="modalview" id="share-thought" style="width: 95%; height: 18em;" data-model="error">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-align="left" data-click="closeModalView" data-role="button">Cancel</a>
+                    <a data-align="right" data-click="postFb" data-role="button">Share in FB</a>
+                </div>
+            </div>
+            <div>
+                <textarea id="input-for-face" placeholder="Please enter between 10 and 200 symbols..." rows="6" style="margin:20px auto; display:block;"></textarea>
+                <p id="error-for-input"></p>
+            </div>
         </div>
+        <script> 
+            function postFb(e) {
+                var head = $("#input-for-face").val();
+                if(head.length < 10){
+                    $("#error-for-input").html("Please enter atleast 10 symbols!");
+                }
+                else if(head.length > 200){
+                    $("#error-for-input").html("Maximum symbols are 200, but you are entered " + head.length + ".");
+                }
+                else{
+                    app.facebook.init();
+                    app.facebook.makefbPost(head);  
+                    closeModalView()
+                }
+            };
+        </script>
+        <script>
+            function closeModalView(e) {
+                $("#input-for-face").val("");
+                $("#share-thought").kendoMobileModalView("close");
+            }
+        </script>
         
     </body>
 </html>

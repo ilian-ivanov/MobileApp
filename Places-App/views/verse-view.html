@@ -13,18 +13,16 @@
 
 <script id="verse-template" type="text/x-kendo-template">
     <div>
-        <h2>#: Name#</h2>
+        <h1 id="bible-head">#:book# #:chapter#:#:number#: </h1>
+        <h2 id="bible-verse">#:verse#</h2>
         
     </div>
 </script>
 
 <script>    
     function postFb(e) {
-        //var quote = $("#quote").html() + "\r\n";
-        //var author = $("#author").html();
-        //var post = quote + author;
-        //debugger;
-        //app.facebook.makefbPost(post);
-        //console.log('op')
+        var head = $("#bible-head").html();
+        var post = head + "\r\n" + $("#bible-verse").html();
+        app.facebook.makefbPost(post);
     };
 </script>
