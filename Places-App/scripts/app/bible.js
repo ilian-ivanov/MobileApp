@@ -5,7 +5,8 @@ var app = app || {};
         verse:[],
         types:[{Name:"Verse of the Day"},{Name:"Random"}],
         getCat: getCat,
-        selectedCategory: null
+        selectedCategory: null,
+        error: ""
     });
     
     function init(e) {
@@ -26,16 +27,18 @@ var app = app || {};
         .then(function (response) {
             console.log(response)
             var verse = [response.contents];
-            viewModel.set("verse", verse);    
+            viewModel.set("verse", verse);  
+            viewModel.set("error", "");  
             app.facebook.init();
         },
         function(response){
-            //var responseText= JSON.parse(response.responseText);
+            var responseText= JSON.parse(response.responseText);
             console.log(responseText.error.message);
-            //var err = {Name: responseText.error.message};
+            var error = responseText.error.message;
             //var error = [err];
             //console.log(error);            
-            //viewModel.set("categories", error);
+            viewModel.set("error", error);
+            viewModel.set("verse", []);    
         });
     }
     
@@ -43,7 +46,7 @@ var app = app || {};
         var category = e.sender.element.prop("id");
         selectedCategory = category;   
         takeVerse();
-        console.log(category);
+        //console.log(category);
     }
     
     a.bible = {

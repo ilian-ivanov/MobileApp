@@ -1,15 +1,18 @@
   <div data-role="view" data-init="app.bible.init" data-show="app.bible.quote" id="verse-view" data-id="verse-view"
       data-layout="main-layout" data-title="Verse">
-            <div data-role="header">
-                <div data-role="navbar">
-                    <a data-role="button" data-icon="reply" href="views/bible-view.html#bible-view" data-align="left">Back</a>
-                    <a data-role="button" data-icon="globe" data-click="postFb" data-align="right">Share in FB</a>
-                </div>
-            </div>
-            <div id="content-verse" data-role="listview" data-bind="source: verse" 
-                data-template="verse-template">                
+        <div data-role="header">
+            <div data-role="navbar">
+                <a data-role="button" data-icon="reply" href="views/bible-view.html#bible-view" data-align="left">Back</a>
+                <a data-role="button" data-icon="globe" data-click="postFb" data-align="right">Share in FB</a>
             </div>
         </div>
+        <div id="content-verse" data-role="listview" data-bind="source: verse" 
+            data-template="verse-template">                
+        </div>
+        <div id="view-error" data-model="viewModel">
+            <p style="color:red" data-bind="text:error"></p>
+        </div>
+    </div>
 
 <script id="verse-template" type="text/x-kendo-template">
     <div>

@@ -42,9 +42,7 @@ var app = app || {};
         }
 
 ///on share btn click
-function makefbPost(FBmessage) {
-    console.log('successsssssssssssssssssssssssssssss')
-  
+function makefbPost(FBmessage) {  
     //debugger;
     $.oajax({
         type: "POST",
@@ -57,8 +55,8 @@ function makefbPost(FBmessage) {
             message: FBmessage,
         },
         success: function (responseData) {
-            navigator.notification.alert("Status Posted", function () {
-            }, "DebugMode", "Done");
+            navigator.notification.alert("Status is posted in your Facebook wall.", function () {
+            }, "Congratulations!", "Done");
         },
         error: function (errorData) {
             navigator.notification.alert("Error encountered. Details:" + errorData.message, function () {

@@ -19,6 +19,7 @@
         <script src="scripts/app/bible.js"></script>
         <script src="scripts/app/facebookShare.js"></script>
         <script src="scripts/app.js"></script>
+        <script src="scripts/app/share-thought.js"></script>
         
     </head>
     <body>
@@ -62,37 +63,14 @@
         <div data-role="modalview" id="share-thought" style="width: 95%; height: 18em;" data-model="error">
             <div data-role="header">
                 <div data-role="navbar">
-                    <a data-align="left" data-click="closeModalView" data-role="button">Cancel</a>
-                    <a data-align="right" data-click="postFb" data-role="button">Share in FB</a>
+                    <a data-align="left" data-click="app.share.closeModalView" data-role="button">Cancel</a>
+                    <a data-align="right" data-click="app.share.init" data-role="button">Share in FB</a>
                 </div>
             </div>
-            <div>
+            <div id="view" data-model="viewModel">
                 <textarea id="input-for-face" placeholder="Please enter between 10 and 200 symbols..." rows="6" style="margin:20px auto; display:block;"></textarea>
-                <p id="error-for-input"></p>
+                <p id="error-for-input" style="color:red" data-bind="text:message"></p>
             </div>
-        </div>
-        <script> 
-            function postFb(e) {
-                var head = $("#input-for-face").val();
-                if(head.length < 10){
-                    $("#error-for-input").html("Please enter atleast 10 symbols!");
-                }
-                else if(head.length > 200){
-                    $("#error-for-input").html("Maximum symbols are 200, but you are entered " + head.length + ".");
-                }
-                else{
-                    app.facebook.init();
-                    app.facebook.makefbPost(head);  
-                    closeModalView()
-                }
-            };
-        </script>
-        <script>
-            function closeModalView(e) {
-                $("#input-for-face").val("");
-                $("#share-thought").kendoMobileModalView("close");
-            }
-        </script>
-        
+        </div>    
     </body>
 </html>
